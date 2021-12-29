@@ -1,0 +1,19 @@
+--------------------------------------------------------------------------------
+  *. Environment in serverless.yml denotes Database credentials
+  *. Profile in serverless.yml denotes respective bucket name where we need to store lambda functions
+
+-------To run locally install these npm using these commands--------------------
+  *. npm i servereless
+  *. npm i serverless-offline
+
+  *. And add this plug in serverless.yml file at last 
+  -->  plugins:
+           - serverless-offline
+
+---------------------------------------------------------------------------------
+
+--------To Deploy lambda functions in server-------------------------------------
+   *. Remove serverless,serverless-offline packages from package.json
+   *. Remove "serverless-offline" plugin from serverless.yml file
+   *. use 'sls deploy' or 'serverless deploy' command to deployment
+---------------------------------------------------------------------------------

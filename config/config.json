@@ -1,0 +1,113 @@
+{
+  "name": "Configuration",
+  "project": "Collabx",
+  "expressVersion": "",
+  "settings": {
+    "apiVersion": "/api/v1",
+    "port": 8080,
+    "accessCode": 65127,
+    "nodeEnv": "live",
+    "JWT": {
+      "secretKey": "SEcretKeyoFCoLLabXXSeRVer",
+      "expiration": "2 days",
+    
+    
+    "statusCode": {
+      "success": {
+        "OK": "200"
+      },
+      "clientError": {
+        "badRequest": 400,
+        "Unauthorized": 401
+      },
+      "serverError": {
+        "internalServerError": 500
+      }
+    },
+    "query": {
+      "fetchUserDetail":"call fetchUserDetailsFromEmail(?)",
+      "insertUserSession": "CALL insertSessionDetails(?, ?, ?)",
+      "logoutUser":"call logoutUser(?,?)"
+    },
+    "out": {
+      "err": false,
+      "suc": true
+    },
+    "email": {
+      "from": "xxxx@g.com>",
+      "subject": {
+        "verifyPasscode": "Registration verification code",
+        "resetPasswordPassCode": "Collabx reset password code",
+        "userRegisterationApprovedStatus":"Account approved",
+        "userRegisterationRejected":"Registeration rejected"
+      },
+      "content":{
+        "brandApprovalContent":"Start matching with creators today. Your account has been verified and you are good to go.",
+        "influencerApprovalContent":"We love your content! Start matching with brands today",
+        "rejectedContent":"We are sorry to inform you that your registeration for CollabXX has been rejected.Please check our requirements to see what may have gone wrong"
+      }
+    },
+    "errors": {
+      "400": {
+        "contentNotAvailable": "Data is not sufficient to process",
+        "emailFormat": "Provided email-id is not valid.",
+        "phone": "Invalid phone number.",
+        "incorrectAccessCode": "Please Enter a correct access code.",
+        "invalidRole": "Provided role is not valid",
+        "incorrect_confirm_password": "Password and Confirm Password do not match"
+      },
+      "500": {
+        "afterQuery": "Database error. Please try again.",
+        "serverError": "Internal Server Error!!"
+      },
+      "messages": {
+        "passwordLength": "Password should be 6-20 characters",
+        "passwordWithSpace": "Don't begin or end your password with blank space",
+        "alreadyRegistered": "This Email is already registered",
+        "duplicateMobile": "The Mobile # is already being used by another user",
+        "invalidCode": "Your code is invalid, expired or already used",
+        "invalidEmail": "The email entered doesn't match an existing account.",
+        "incorrectPassword": "wrong password",
+        "tokenMalformed": "Token malformed error",
+        "InvalidUser": "User not found",
+        "tokenEmpty": "Token was empty",
+        "tokenNotExpired": "Token was not expired",
+        "updatePasswordFailed": "Failed to update password, Either Passcode Expired or User not Found",
+        "dataNotFound" : "Data not sufficient to process",
+        "invalidAdminLogin" : "Invalid login credentials for Admin",
+        "invalidUserStatus" : "Invalid User Status",
+        "InvalidFirstName" :"invalid first name"
+        
+      }
+    },
+    "success": {
+      "messages": {
+        "loginSuccess": "Logged in successfully",
+        "resetPasswordCodeSent": "A recovery code for reset password is sent to your mailbox",
+        "recoveryCodeVerified": "Recovery code is verified",
+        "passwordUpdated": "Password is updated successfully",
+        "emailNotFound": "The email entered doesn't match an existing account ",
+        "invalidEmail": "Email address is invalid or not verified",
+        "passwordIncorrect": "Incorrect Password",
+        "registrationSuccess": "Your registration is complete",
+        "accessDenied": "Access Denied",
+        "userIdNotFound" : "User is not found",
+        "brandUserIdNotFound" : "Brand User is not found",
+        "interestedUserSuccessMessage" : "Thanks! We’ll get back to you.",
+        "interestedUserMailAlreadyExists" : "Your email is already in our list.",
+        "updateSuccess" : "Profile updated successfully"
+      }
+    },
+    "messageContent": {
+      "verificationMessage": "Your Collabx verification code is ",
+      "resetPasswordPassCodeMessage": "Your reset password verification code is ",
+      "adminResetPasswordPassCodeMessage": "Your admin account reset password verification code is "
+    },
+    "notificationContent": {
+      "collabLaunched": "Your Collab has been launched.",
+      "collabEnded": "Your Collab has ended.",
+      "collabMatched": "{{influencerName}} matched with your Collab."
+    }
+  }
+}
+}

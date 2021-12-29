@@ -1,0 +1,115 @@
+service: collabxx
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+  stage: dev
+  profile: collabax-dev
+  timeout: 30
+  environment:
+   DB_HOST: "localhost"
+   DB_PORT: "3306"
+   DB_NAME: "dbName"
+   DB_USER: "root"
+   DB_PASSWORD: "root"
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ses:*
+        - lambda:*
+        - sts:*
+        - s3:*
+        - sns:*
+        - ec2:DescribeNetworkInterfaces
+        - ec2:CreateNetworkInterface
+        - ec2:DeleteNetworkInterface
+        - ec2:DescribeInstances
+        - ec2:AttachNetworkInterface
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
+        - rds:*
+      Resource:
+        - "arn:aws:rds:us-east-1:570510828207:db:collabxxdev"
+
+functions:
+  login:
+    handler: handler.login
+    iamRoleStatements: []
+    vpc:
+      securityGroupIds:
+        - sg-438e2c42
+      subnetIds:
+        - subnet-f5dce3b8
+        - subnet-fa1534f4
+        - subnet-85d3b9a4
+        - subnet-19bbd346
+        - subnet-aa12a19b
+        - subnet-f9432c9f
+    events:
+      - http:
+          path: /api/v1/login
+          method: post
+          cors: true
+  logout:
+    handler: handler.logout
+    iamRoleStatements: []
+    vpc:
+      securityGroupIds:
+        - sg-438e2c42
+      subnetIds:
+        - subnet-f5dce3b8
+        - subnet-fa1534f4
+        - subnet-85d3b9a4
+        - subnet-19bbd346
+        - subnet-aa12a19b
+        - subnet-f9432c9f
+    events:
+      - http:
+          path: /api/v1/logout
+          method: get
+          cors: true
+  helloWorld:
+    handler: handler.helloWorld
+    iamRoleStatements: []
+    vpc:
+      securityGroupIds:
+        - sg-438e2c42
+      subnetIds:
+        - subnet-f5dce3b8
+        - subnet-fa1534f4
+        - subnet-85d3b9a4
+        - subnet-19bbd346
+        - subnet-aa12a19b
+        - subnet-f9432c9f
+    events:
+      - http:
+          path: /api/v1/helloWorld
+          method: get
+          cors: true        
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+
+plugins:
+    - serverless-offline
+
+
